@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNet.Identity
+@using CMPS_285.Models
+@model CMPS_285.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+<p class="text-success">@ViewBag.StatusMessage</p>
+<h1 style="text-align:center"> Your account information</h1>
+
+<div class="table">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th colspan="2"> <strong>Change your account Informations </strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> Full Name: </td>
+                <td> @Html.DisplayName(User.Identity.GetFullName())</td>
+            </tr>
+            <tr>
+                <td> Username:</td>
+                <td> @Html.DisplayName(" " + User.Identity.GetUserName()) </td>
+            </tr>
+            <tr>
+                <td> Password: </td>
+                <td> @Html.ActionLink("Change your Password", "ChangePassword")</td>
+            </tr>
+            <tr>
+                <td> Phone Number: </td>
+                <td> @Html.DisplayName(" " + User.Identity.GetPhoneNumber()) </td>
+            </tr>
+            <tr>
+                <td> Gender: </td>
+                <td> @Html.DisplayName(" " + User.Identity.GetGender()) </td>
+            </tr>
+            <tr>
+                <td> Street Address: </td>
+                <td> @Html.DisplayName(" " + User.Identity.GetStreetAddress()) </td>
+            </tr>
+            <tr>
+                <td> City: </td>
+                <td> @Html.DisplayName(" " + User.Identity.GetCity()) </td>
+            </tr>
+            <tr>
+                <td> State: </td>
+                <td> @Html.DisplayName(" " + User.Identity.GetState()) </td>
+            </tr>
+            <tr>
+                <td> Zip Code: </td>
+                <td> @Html.DisplayName(" " + User.Identity.GetZipCode()) </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

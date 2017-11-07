@@ -1,0 +1,180 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - RYDE| Ride for free </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/sidebar.css" />
+
+    <!--Javascript for collapse of navbar-->
+    <script>
+       var first_click = true;
+        //function clickChecker() {
+          //  var click = document.getElementById("abc");
+            //if (first_click) {
+             //   openNav();
+              //  first_click = false;
+           // }
+           // else {
+            //    closeNav();
+             //   first_click = true;
+            //}
+        //}
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "13.1%";
+            document.getElementById("abc").style.display = "none";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("abc").style.display = "block";
+        }
+
+        function openNav_right()
+        {
+            if (first_click == true)
+            {
+                document.getElementById("xyz").style.marginTop = "14.8%";
+                document.getElementById("xyz").style.display = "block";
+                document.getElementById("xyz").style.background = "black";
+                document.getElementById("xyz").style.height = "50%";
+                first_click = false;
+            }
+            else
+            {
+                document.getElementById("xyz").style.display = "none";
+                document.getElementById("xyz").style.marginTop = "6%";
+                document.getElementById("xyz").style.background = "white";
+                first_click = true;
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background: #1b3477;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Ryde", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" style="float:right;">
+                <ul class="nav navbar-nav" />
+                    @if (Request.IsAuthenticated == false)
+                    {
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li><input type="button" class="btn btn-success" style="margin-top: 8%;"value="Log In" onclick="location.href='@Url.Action("login", "Account")'" /></li>
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <ul class="nav navbar-nav navbar-right" >
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        My Account
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            @Html.ActionLink(" " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>@Html.ActionLink("Messages", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Request a Ride", "About", "Home")</li>
+                                        <li class="divider"></li>
+                                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    @if (Request.IsAuthenticated == true)
+    {
+        <!-- <div class="w3-sidebar w3-bar-block w3-green w3-large" style="width:15%;">
+            <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;&nbsp;&nbsp;Home</a>
+             <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="glyphicon glyphicon-inbox"></span> &nbsp;&nbsp;&nbsp;&nbsp;Messages</a>
+             <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="glyphicon glyphicon-star"></span> &nbsp;&nbsp;&nbsp;&nbsp;Favourites</a>
+             <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="fa fa-cab"></span> &nbsp;&nbsp;&nbsp;&nbsp;Previous Rides</a>
+             <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="fa fa-rocket"></span> &nbsp;&nbsp;&nbsp;&nbsp;Leader Board</a>
+             <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" title="Refer Your Friend and Ride with your friend for free" style="text-decoration:none;"><span class="fa fa-user-plus"></span> &nbsp;&nbsp;&nbsp;&nbsp;Refer a Friend </a>
+         </div> -->
+        <div class="col-xs-1" style="padding-left:0;">
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" style="font-size:x-large; " class="w3-bar-item w3-button" onclick="closeNav()">&times;</a> <br />
+                <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;&nbsp;Home</a>
+                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="glyphicon glyphicon-inbox"></span> &nbsp;&nbsp;&nbsp;&nbsp;Messages</a>
+                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="glyphicon glyphicon-star"></span> &nbsp;&nbsp;&nbsp;&nbsp;Favourites</a>
+                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="fa fa-cab"></span> &nbsp;&nbsp;&nbsp;&nbsp;Previous Rides</a>
+                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="fa fa-rocket"></span> &nbsp;&nbsp;&nbsp;&nbsp;Leader Board</a>
+                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" title="Refer Your Friend and Ride with your friend for free" style="text-decoration:none;"><span class="fa fa-user-plus"></span> &nbsp;&nbsp;&nbsp;&nbsp;Refer a Friend </a>
+            </div>
+            <button type="button" class="btn btn-primary btn-lg" style="overflow:hidden;border-radius: 0;background: url('/img/1.jpg');background-repeat: no-repeat;border-color: navy;" id="abc" onclick="openNav()">&#9776;</button>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg" style="overflow:hidden;border-radius: 0;float:right;" id="def" onclick="openNav_right()">
+            <span class="glyphicon glyphicon-chevron-down"></span>
+        </button>
+
+    <div class="sidenav_right" id="xyz">
+        <ul style="padding-left:2%;">
+            <button type="submit" class="btn btn-success">Host a Ride </button>
+            <br />
+            <br />
+            <button type="submit" class="btn btn-success" style="background: url(img/1.jpg);background-position: center;">Request a Ride </button>
+        </ul>
+        <br />
+        <br />
+        <fieldset style="margin-left: 2;text-align: -webkit-right;">
+            <legend align="center">My Rating</legend>
+            <div class="rating" style="text-align: -webkit-center;">
+                <h3> 5.0 </h3>
+                <h4> Average Rating </h4>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star"></i>
+                <i class="glyphicon glyphicon-star half"></i>
+
+            </div>
+            <a><small>more details</small> </a>
+        </fieldset>
+    </div>
+    }
+
+    <div class="container body-content">
+        @RenderBody()
+     </div>
+        <footer style="margin-top:15%;">
+            <hr />
+            <p style="color:black;font-style: italic; text-align:center;"> <strong> Connect </strong> with us on Social Media </p>
+            <div class="SocialMedia" style="text-align:center";>
+                <a href="#" class="fa fa-facebook" style="font-size:200%;color:#4267b2"></a>
+                <a href="#" class="fa fa-twitter" style="font-size:200%;color:#f45d22"></a>
+                <p style="color:black;font-size: 17px;"> RYDE, CopyRight &copy Team 2 CMPS_285; 2017 </p>
+                <a href="#"> @Html.ActionLink("Contact Us", "Contact", "Home") </a>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

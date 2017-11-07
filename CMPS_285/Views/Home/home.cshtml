@@ -1,0 +1,18 @@
+﻿@using CMPS_285.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if(Request.IsAuthenticated == false)
+{
+            <h1> You must Log In to continue.</h1>
+}
+
+else
+{
+    <div class="nav" style="text-align:center;">
+           <h1> Notifications</h1>
+        <ul> <h3>You have no new notifications.</h3> </ul>
+        </div>
+
+}

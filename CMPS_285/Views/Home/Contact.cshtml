@@ -1,0 +1,84 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+
+<div class="jumbotron">
+    <h2> <em>Feel Free to Reach Us</em> <small><i>via E-mail/ Phone/ Message</i></small></h2>
+    <h3>
+        Be it be any questions, Suggestions or complaints.
+        <br>
+        We are here to listen you.<br>
+        Your Suggestions and complaints will guide us to become better.
+    </h3>
+</div>
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="well well-sm">
+            <form>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </span>
+                                <input type="text" class="form-control" id="name" placeholder="Enter name" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">
+                                    Email Address
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-envelope"></span>
+                                    </span>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter email" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">
+                                        Subject
+                                    </label>
+                                    <select id="subject" name="subject" class="form-control" required="required">
+                                        <option value="na" selected="">Choose One:</option>
+                                        <option value="service">General Customer Service</option>
+                                        <option value=" Complaints && suggestions">Suggestions</option>
+                                        <option value="Feedbacks">Feedbacks </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="name">
+                                        Message
+                                    </label>
+                                    <textarea name="message" id="message" class="form-control" rows="15" cols="0" required="required"
+                                              placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                        </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<address>
+    CMPS TEAM_2<br />
+    Hammond, LA 70401<br />
+    <abbr title="Phone">P:</abbr>
+    612.839.3976
+</address>
