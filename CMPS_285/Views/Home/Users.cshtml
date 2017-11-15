@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+
+@model IEnumerable<CMPS_285.Models.ApplicationUser>
+
+<h2>Registered Users</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            A
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @if(item.UserName != )
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                <button class="btn-default">Add as Favourites <span class="glyphicon-star"></span></button>
+            </td>
+
+        </tr>
+    }
+
+</table>

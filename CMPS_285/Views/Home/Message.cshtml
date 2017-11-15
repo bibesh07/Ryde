@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--<div class="row form-group">
+    <div class="col-md-6">
+        <label id="user" for="User" class="form-inline" > User: </label>
+        <input type="text" id="txt" class="form-control" />
+        <button id="send" class="btn-success">Send</button>
+    </div>
+</div>-->
+
+<h2> Chat</h2>
+<div class="row">
+    <div class="col-md-4">
+        <h3>User</h3>
+        <ul id="user"></ul>
+    </div>
+    <div class="col-md-4">
+        <br />
+        <input type="text" id="txt" class="form-control" />
+        <button id="send" class="btn btn-danger">Send</button>
+    </div>
+    <div class="col-md-4">
+        <h3>Message</h3>
+        <ul id="message"></ul>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/SignalR/app.js"></script>
+        }

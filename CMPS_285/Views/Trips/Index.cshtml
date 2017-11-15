@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CMPS_285.Models.Trip>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center;">All Notifications</h2>
+
+<table class="table table-bordered table-hover" >
+   <tr>
+       <th colspan="1"> No.</th>
+        <th> Hosted Rides </th>
+    </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+        </td>
+        <td colspan="2">
+            @Html.DisplayFor(modelItem => item.driver) has hosted a ride from 
+            @Html.DisplayFor(modelItem => item.origin) to
+            @Html.DisplayFor(modelItem => item.destination) at
+            @Html.DisplayFor(modelItem => item.time)
+            @Html.DisplayFor(modelItem => item.passanger1)
+            &nbsp;&nbsp;&nbsp;
+            Available Seats <span class="alert-success"></span>
+        </td>
+    </tr>
+}
+
+</table>
+
+
+@foreach (var item in Model)
+{
+    <div class="well" style="background-color: lavender">
+      <p>  @Html.DisplayFor(modelItem => item.driver) has hosted a ride from
+        @Html.DisplayFor(modelItem => item.origin)to
+        @Html.DisplayFor(modelItem => item.destination) at
+        @Html.DisplayFor(modelItem => item.time)
+        @Html.DisplayFor(modelItem => item.passanger1)
+      <p>Available Seats: 
+        @for (int i = 0; i <= item.seats; i++)
+        {
+        <button type="button" class="btn btn-success" title="Reserve Seat" > <span class="glyphicon glyphicon-user"></span></button>
+        }</p>
+    </div>
+}
+   

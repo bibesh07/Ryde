@@ -100,9 +100,9 @@ namespace CMPS_285.Controllers
             return RedirectToAction("ManageLogins", new { Message = message });
         }
 
-    //
-    // GET: /Manage/AddPhoneNumber
-    public ActionResult AddPhoneNumber()
+        //
+        // GET: /Manage/AddPhoneNumber
+        public ActionResult AddPhoneNumber()
         {
             return View();
         }
@@ -334,7 +334,7 @@ namespace CMPS_285.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -385,6 +385,6 @@ namespace CMPS_285.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

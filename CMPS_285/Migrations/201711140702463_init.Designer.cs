@@ -7,13 +7,13 @@ namespace CMPS_285.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class PawanChange : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PawanChange));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710191955424_PawanChange"; }
+            get { return "201711140702463_init"; }
         }
         
         string IMigrationMetadata.Source

@@ -105,5 +105,10 @@ namespace CMPS_285
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
+
+        internal Task PasswordSignInAsync(string username, Func<int> getHashCode, bool rememberMe, bool shouldLockout)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

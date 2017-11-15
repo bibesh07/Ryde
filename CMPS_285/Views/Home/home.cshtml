@@ -1,18 +1,87 @@
 ﻿@using CMPS_285.Models
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="~/css/modal.css" />
 
 @if(Request.IsAuthenticated == false)
 {
             <h1> You must Log In to continue.</h1>
 }
 
+//Show other Users
 else
 {
-    <div class="nav" style="text-align:center;">
-           <h1> Notifications</h1>
-        <ul> <h3>You have no new notifications.</h3> </ul>
-        </div>
 
-}
+    @model IEnumerable<CMPS_285.Models.ApplicationUser>
+
+    <div class="col-md-3">
+    <table class="table table-hover">
+        <tr>
+            <th>
+                Other Users 
+            </th>
+        </tr>
+        
+        @foreach (var item in Model)
+        {
+            if (item.Fullname != User.Identity.GetFullName())
+            {
+             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fullname)
+                </td>
+                <td><button class="btn btn-success" title="Add as Favourite"> <span class="glyphicon glyphicon-star"></span></button></td>
+             </tr>
+             }
+         }
+    </table>    
+        <!--popupbox-->
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Host a Ride</button>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" style="display:none" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content" style="width: 80%;height:40%;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Ride Information</h4>
+                     </div>
+                        @using (Html.BeginForm("Create", "Trips", FormMethod.Post))
+                        {
+                              @Html.AntiForgeryToken()
+                                <div class="modal-body">
+                                <div class="row form-group">
+                                    <div class="col-col-md-6">
+                                        <input type="text" name="origin" id="origin" class="form-control" placeholder="Origin">
+                                    </div>
+                                    <br />
+                                    <div class="col-col-md-6">
+                                        <input type="text" name="destination" id="destination" class="form-control" placeholder="Destination">
+                                    </div>
+                                    <br />
+                                    <div class="col-col-md-6">
+                                        <input type="number" name="seats" id="seats" class="form-control" placeholder="No of seats available">
+                                    </div>
+                                    <br />
+                                    <div class="col-col-md-6">
+                                        <label for="Time" class="label-inline">Date and Time</label>
+                                        <input type="datetime-local" name="time" id="time" class="form-control" placeholder="Date and Time of Ride">
+                                    </div>
+                                    <br />
+                                    <input type="submit" class="btn btn-warning" value="Host" />
+                                </div>
+                            </div>
+                        }
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Notificaitons-->
+ }

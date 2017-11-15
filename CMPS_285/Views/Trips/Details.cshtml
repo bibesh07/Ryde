@@ -1,0 +1,99 @@
+﻿@model CMPS_285.Models.Trip
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Trip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.origin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.origin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.destination)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.destination)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passanger1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passanger1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passanger2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passanger2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passanger3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passanger3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passanger4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passanger4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passanger5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passanger5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.driver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.driver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seats)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
