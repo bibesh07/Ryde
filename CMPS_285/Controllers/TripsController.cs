@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CMPS_285.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.SqlClient;
 
 namespace CMPS_285.Controllers
 {
@@ -125,6 +128,50 @@ namespace CMPS_285.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public ActionResult Reserve(string userId, int driverID, string origin, string destination, string dateTime)
+        {
+            ApplicationDbContext database = new ApplicationDbContext();
+            ApplicationUser user = database.Users.Find(userId);
+            String email = user.Email;
+            String name = user.Fullname;
+            Trip trip = db.Trips.Find(driverID);
+            String driverName = trip.driver;
+            ApplicationUser driver = database.Users.First(c=> c.Fullname == driverName);
+            String emailOfDriver = driver.Email;
+            seatsPending(trip);
+            trip.sendEmailConfirmation(email , emailOfDriver, origin, destination,dateTime, name);
+            return RedirectToAction("Index");
+        }
+
+        protected void seatsPending(Trip trip)
+        {
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Trips.mdf;Integrated Security=True";
+            SqlConnection cnn = new SqlConnection(connectionString);
+
+            cnn.Open();
+            //queries to update in SQL
+            SqlCommand command;
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            String sql = "Update Trips set seats=" + (trip.seats-1) + ", pending= '" + (trip.pending+1) + "' where ID=" + trip.ID ;
+            command = new SqlCommand(sql, cnn);
+            adapter.UpdateCommand = new SqlCommand(sql, cnn);
+            adapter.UpdateCommand.ExecuteNonQuery();
+            command.Dispose();
+            cnn.Close();
+        }
+
+        public void decider(Trip trip)
+        {
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Trips.mdf;Integrated Security=True";
+            SqlConnection cnn = new SqlConnection(connectionString);
+            cnn.Open();
+            if(true)
+            {
+
+            }
         }
     }
 }

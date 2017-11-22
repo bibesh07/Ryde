@@ -208,6 +208,19 @@
       <DependentUpon>201711140702463_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\TripDBContext\201711140705391_InitialCreate.cs" />
+    <Compile Include="Migrations\TripDBContext\201711140705391_InitialCreate.Designer.cs">
+      <DependentUpon>201711140705391_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711221619437_Initial.cs" />
+    <Compile Include="Migrations\TripDBContext\201711221619437_Initial.Designer.cs">
+      <DependentUpon>201711221619437_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711221634182_Initial1.cs" />
+    <Compile Include="Migrations\TripDBContext\201711221634182_Initial1.Designer.cs">
+      <DependentUpon>201711221634182_Initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityExtensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -310,6 +323,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711140702463_init.resx">
       <DependentUpon>201711140702463_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711140705391_InitialCreate.resx">
+      <DependentUpon>201711140705391_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711221619437_Initial.resx">
+      <DependentUpon>201711221619437_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711221634182_Initial1.resx">
+      <DependentUpon>201711221634182_Initial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -93,7 +93,7 @@
                                             @Html.ActionLink(" " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                                         </li>
                                         <li class="divider"></li>
-                                        <li>@Html.ActionLink("Messages", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Messages", "Message", "Home")</li>
                                         <li>@Html.ActionLink("Request a Ride", "About", "Home")</li>
                                         <li class="divider"></li>
                                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
@@ -119,12 +119,12 @@
         <div class="col-xs-1" style="padding-left:0;">
             <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" style="font-size:x-large; " class="w3-bar-item w3-button" onclick="closeNav()">&times;</a> <br />
-                <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;&nbsp;Home</a>
-                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="glyphicon glyphicon-inbox"></span> &nbsp;&nbsp;&nbsp;&nbsp;Messages</a>
-                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="glyphicon glyphicon-star"></span> &nbsp;&nbsp;&nbsp;&nbsp;Favourites</a>
-                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="fa fa-cab"></span> &nbsp;&nbsp;&nbsp;&nbsp;Previous Rides</a>
-                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;"><span class="fa fa-rocket"></span> &nbsp;&nbsp;&nbsp;&nbsp;Leader Board</a>
-                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" title="Refer Your Friend and Ride with your friend for free" style="text-decoration:none;"><span class="fa fa-user-plus"></span> &nbsp;&nbsp;&nbsp;&nbsp;Refer a Friend </a>
+                <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;&nbsp;Home</a>
+                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="glyphicon glyphicon-inbox"></span> &nbsp;&nbsp;&nbsp;&nbsp;Messages</a>
+                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="glyphicon glyphicon-star"></span> &nbsp;&nbsp;&nbsp;&nbsp;Favourites</a>
+                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="fa fa-cab"></span> &nbsp;&nbsp;&nbsp;&nbsp;Previous Rides</a>
+                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="fa fa-rocket"></span> &nbsp;&nbsp;&nbsp;&nbsp;Leader Board</a>
+                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" title="Refer Your Friend and Ride with your friend for free" style="color: aliceblue;text-decoration:none;"><span class="fa fa-user-plus"></span> &nbsp;&nbsp;&nbsp;&nbsp;Refer a Friend </a>
             </div>
             <button type="button" class="btn btn-primary btn-lg" style="overflow:hidden;border-radius: 0;background: url('/img/1.jpg');background-repeat: no-repeat;border-color: navy;" id="abc" onclick="openNav()">&#9776;</button>
         </div>
