@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CMPS_285.Models.RequestRide>
+@using Microsoft.AspNet.Identity;
+@using CMPS_285.Models;
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    a{
+        text-decoration:none !important;
+    }
+</style>
+<h2 style="text-align:center;">Requested for Ride</h2>
+
+@foreach (var item in Model.Reverse())
+{
+    if (item.Driver == null)
+    {
+        <div class="well" style="background-color: lavender">
+
+            @if (User.Identity.GetFullName() == item.Passenger)
+            {
+                <a>  You have </a>
+            }
+            else
+            {
+                @Html.DisplayFor(modelItem => item.Passenger)<a> has </a>
+            }
+             requested for a ride for
+
+@Html.DisplayFor(modelItem => item.Seats) Seats from
+@Html.DisplayFor(modelItem => item.Origin) to
+
+@Html.DisplayFor(modelItem => item.Destination) at @Html.DisplayFor(modelItem => item.Time)
+
+
+@if (User.Identity.GetFullName() != item.Passenger)
+{
+            <form method="post" action="@Url.Action("AcceptRequest", "RequestRides", new { userId = User.Identity.GetUserId() , passengerId = item.ID, origin = item.Origin, destination = item.Destination, datetime = item.Time})">
+            <div class="pull-right" ;" style="margin-top:-.6%;">
+                <button type="submit" title="Accept" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Accept this request</button>
+            </div>
+                 </form> 
+}
+        </div>
+
+    }
+}

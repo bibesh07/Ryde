@@ -131,7 +131,7 @@ namespace CMPS_285.Controllers
         }
 
         [HttpPost]
-        public ActionResult Reserve(string userId, int driverID, string origin, string destination, string dateTime)
+        public ActionResult Reserve(string userId, int driverID, string origin, string destination, DateTime dateTime)
         {
             ApplicationDbContext database = new ApplicationDbContext();
             ApplicationUser user = database.Users.Find(userId);
@@ -141,12 +141,14 @@ namespace CMPS_285.Controllers
             String driverName = trip.driver;
             ApplicationUser driver = database.Users.First(c=> c.Fullname == driverName);
             String emailOfDriver = driver.Email;
-            seatsPending(trip);
+            seatsPending(trip, name);
             trip.sendEmailConfirmation(email , emailOfDriver, origin, destination,dateTime, name);
+            //temp notificaitons
+            TempData["Message"] = "You have succesfully requested your ride. Your ride request is pending you will be notified once your ride is confirmed. Thank You";
             return RedirectToAction("Index");
         }
 
-        protected void seatsPending(Trip trip)
+        protected void seatsPending(Trip trip, String name)
         {
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Trips.mdf;Integrated Security=True";
             SqlConnection cnn = new SqlConnection(connectionString);
@@ -155,7 +157,27 @@ namespace CMPS_285.Controllers
             //queries to update in SQL
             SqlCommand command;
             SqlDataAdapter adapter = new SqlDataAdapter();
-            String sql = "Update Trips set seats=" + (trip.seats-1) + ", pending= '" + (trip.pending+1) + "' where ID=" + trip.ID ;
+            String sql;
+            if (trip.passanger1 == null)
+            {
+                sql = "Update Trips set seats=" + (trip.seats - 1) + ", pending= '" + (++trip.pending) + "', passanger1 = '" + name + "', p1Status ='" + "P" + "'where ID=" + trip.ID;
+            }
+            else if (trip.passanger2 == null)
+            {
+                sql = "Update Trips set seats=" + (trip.seats - 1) + ", pending= '" + (++trip.pending) + "', passanger2 = '" + name + "', p2Status ='" + "P" + "'where ID=" + trip.ID;
+            }
+            else if (trip.passanger3 == null)
+            {
+                sql = "Update Trips set seats=" + (trip.seats - 1) + ", pending= '" + (trip.pending + 1) + "', passanger3 = '" + name + "', p3Status ='" + "P" + "'where ID=" + trip.ID;
+            }
+            else if (trip.passanger4 == null)
+            {
+                sql = "Update Trips set seats=" + (trip.seats - 1) + ", pending= '" + (trip.pending + 1) + "', passanger4 = '" + name + "', p4Status ='" + "P" + "'where ID=" + trip.ID;
+            }
+            else
+            {
+                sql = "Update Trips set seats=" + (trip.seats - 1) + ", pending= '" + (trip.pending + 1) + "', passanger5 = '" + name + "', p5Status ='" + "P" + "'where ID=" + trip.ID;
+            }
             command = new SqlCommand(sql, cnn);
             adapter.UpdateCommand = new SqlCommand(sql, cnn);
             adapter.UpdateCommand.ExecuteNonQuery();
@@ -163,15 +185,105 @@ namespace CMPS_285.Controllers
             cnn.Close();
         }
 
-        public void decider(Trip trip)
+        public ActionResult Decider(int driverId, Boolean decision, String name)
         {
+            Trip trip = db.Trips.Find(driverId);
+            ApplicationDbContext database = new ApplicationDbContext();
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Trips.mdf;Integrated Security=True";
             SqlConnection cnn = new SqlConnection(connectionString);
+            SqlCommand command;
+            String sql;
+            SqlDataAdapter adapter = new SqlDataAdapter();
             cnn.Open();
-            if(true)
+            if (decision == true && trip.passanger1 == name && trip.p1Status == "P")
             {
+                sql = "Update Trips set pending=" + (--trip.pending) + ", confirmed= '" + (++trip.confirmed) + "', p1Status ='"+ "C" + "'where ID=" + trip.ID;
+                ApplicationUser passanger = database.Users.First(c => c.Fullname == trip.passanger1);
+                String email = passanger.Email;
+                trip.sendConfirmed(email, trip.origin, trip.destination, trip.time);
+            }
+            else if (decision == true && trip.passanger2 == name && trip.p2Status == "P")
+            {
+                sql = "Update Trips set pending=" + (--trip.pending) + ", confirmed= '" + (++trip.confirmed) + "', p2Status ='" + "C" + "'where ID=" + trip.ID;
+                ApplicationUser passanger = database.Users.First(c => c.Fullname == trip.passanger2);
+                String email = passanger.Email;
+                trip.sendConfirmed(email, trip.origin, trip.destination, trip.time);
+            }
+            else if (decision == true && trip.passanger3 == name && trip.p3Status == "P")
+            {
+                sql = "Update Trips set pending=" + (--trip.pending) + ", confirmed= '" + (++trip.confirmed) + "', p3Status ='" + "C" + "'where ID=" + trip.ID;
+                ApplicationUser passanger = database.Users.First(c => c.Fullname == trip.passanger3);
+                String email = passanger.Email;
+                trip.sendConfirmed(email, trip.origin, trip.destination, trip.time);
 
             }
+            else if (decision == true && trip.passanger4 == name && trip.p4Status == "P")
+            {
+                sql = "Update Trips set pending=" + (--trip.pending) + ", confirmed= '" + (++trip.confirmed) + "', p4Status ='" + "C" + "'where ID=" + trip.ID;
+                ApplicationUser passanger = database.Users.First(c => c.Fullname == trip.passanger4);
+                String email = passanger.Email;
+                trip.sendConfirmed(email, trip.origin, trip.destination, trip.time);
+            }
+            else if (decision == true && trip.passanger5 == name && trip.p5Status == "P")
+            {
+                sql = "Update Trips set pending=" + (--trip.pending) + ", confirmed= '" + (++trip.confirmed) + "', p5Status ='" + "C" + "'where ID=" + trip.ID;
+                ApplicationUser passanger = database.Users.First(c => c.Fullname == trip.passanger5);
+                String email = passanger.Email;
+                trip.sendConfirmed(email, trip.origin, trip.destination, trip.time);
+            }
+            else if(decision == false && trip.passanger1 == name && trip.p1Status == "P")
+            {
+                sql = "Update Trips set pending=" + (--trip.pending) + ", seats= '" + (++trip.seats) + "', passanger1 ='"+ " " +"', p1Status ='" + " " + "'where ID=" + trip.ID;
+            }
+            else if (decision == false && trip.passanger2 == name && trip.p2Status == "P")
+            {
+                sql = "Update Trips set pending=" + (--trip.pending) + ", seats= '" + (++trip.seats) + "', passanger2 ='" + " " + "', p2Status ='" + " " + "'where ID=" + trip.ID;
+            }
+            else if (decision == false && trip.passanger3 == name && trip.p3Status == "P")
+            {
+                sql = "Update Trips set pending=" + (--trip.pending) + ", seats= '" + (++trip.seats) + "', passanger3 ='" + " " + "', p3Status ='" + " " + "'where ID=" + trip.ID;
+            }
+            else if (decision == false && trip.passanger4 == name && trip.p4Status == "P")
+            {
+                sql = "Update Trips set pending=" + (--trip.pending) + ", seats= '" + (++trip.seats) + "', passanger4 ='" + " " + "', p4Status ='" + " " + "'where ID=" + trip.ID;
+            }
+            else 
+            {
+                sql = "Update Trips set pending=" + (--trip.pending) + ", seats= '" + (++trip.seats) + "', passanger5 ='" + " " + "', p5Status ='" + " " + "'where ID=" + trip.ID;
+            }
+            command = new SqlCommand(sql, cnn);
+            adapter.UpdateCommand = new SqlCommand(sql, cnn);
+            adapter.UpdateCommand.ExecuteNonQuery();
+            command.Dispose();
+            cnn.Close();
+            return RedirectToAction("requestedRides");
+        }
+
+        public ActionResult referaFriend()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult referralConfirmation(String email)
+        {
+            ApplicationDbContext data = new ApplicationDbContext();
+            foreach (var item in data.Users)
+            {
+                if( item.Email == email)
+                {
+                    return View("ReferaFriendDenied");
+                }
+            }
+            Trip trip = new Trip();
+            trip.refer(email);
+            TempData["Message"] = "You have succesfully requested your friend Thank You. If you want to request any more of your friend feel free.";
+            return RedirectToAction("referaFriend");
+        }
+
+        public ActionResult requestedRides()
+        {
+            return View(db.Trips.ToList());
         }
     }
 }

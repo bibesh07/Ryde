@@ -197,6 +197,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RequestRidesController.cs" />
     <Compile Include="Controllers\TripsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -220,11 +221,80 @@
     <Compile Include="Migrations\TripDBContext\201711221634182_Initial1.Designer.cs">
       <DependentUpon>201711221634182_Initial1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250601118_DataAnnotations.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250601118_DataAnnotations.Designer.cs">
+      <DependentUpon>201711250601118_DataAnnotations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250628513_DataAnnotations1.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250628513_DataAnnotations1.Designer.cs">
+      <DependentUpon>201711250628513_DataAnnotations1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250705037_Initial2.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250705037_Initial2.Designer.cs">
+      <DependentUpon>201711250705037_Initial2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250722517_Initial3.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250722517_Initial3.Designer.cs">
+      <DependentUpon>201711250722517_Initial3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250735010_Initial4.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250735010_Initial4.Designer.cs">
+      <DependentUpon>201711250735010_Initial4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250738023_Initial5.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250738023_Initial5.Designer.cs">
+      <DependentUpon>201711250738023_Initial5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250742143_Initial6.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250742143_Initial6.Designer.cs">
+      <DependentUpon>201711250742143_Initial6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250857258_Initial7.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250857258_Initial7.Designer.cs">
+      <DependentUpon>201711250857258_Initial7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250923481_Initial8.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250923481_Initial8.Designer.cs">
+      <DependentUpon>201711250923481_Initial8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250939149_Initial9.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250939149_Initial9.Designer.cs">
+      <DependentUpon>201711250939149_Initial9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711250946195_Initial10.cs" />
+    <Compile Include="Migrations\TripDBContext\201711250946195_Initial10.Designer.cs">
+      <DependentUpon>201711250946195_Initial10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711252044275_Initial11.cs" />
+    <Compile Include="Migrations\TripDBContext\201711252044275_Initial11.Designer.cs">
+      <DependentUpon>201711252044275_Initial11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711252308096_Initial12.cs" />
+    <Compile Include="Migrations\TripDBContext\201711252308096_Initial12.Designer.cs">
+      <DependentUpon>201711252308096_Initial12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711261804567_Initial13.cs" />
+    <Compile Include="Migrations\TripDBContext\201711261804567_Initial13.Designer.cs">
+      <DependentUpon>201711261804567_Initial13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711261809047_Initial14.cs" />
+    <Compile Include="Migrations\TripDBContext\201711261809047_Initial14.Designer.cs">
+      <DependentUpon>201711261809047_Initial14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711262242033_Initial15.cs" />
+    <Compile Include="Migrations\TripDBContext\201711262242033_Initial15.Designer.cs">
+      <DependentUpon>201711262242033_Initial15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\TripDBContext\201711270521111_Initial16.cs" />
+    <Compile Include="Migrations\TripDBContext\201711270521111_Initial16.Designer.cs">
+      <DependentUpon>201711270521111_Initial16.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\TripDBContext\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityExtensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RequestRide.cs" />
     <Compile Include="Models\Trip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -303,6 +373,15 @@
     <Content Include="Views\Trips\Details.cshtml" />
     <Content Include="Views\Trips\Edit.cshtml" />
     <Content Include="Views\Trips\Index.cshtml" />
+    <Content Include="Views\Home\allUsers.cshtml" />
+    <Content Include="Views\Trips\requestedRides.cshtml" />
+    <Content Include="Views\Trips\referaFriend.cshtml" />
+    <Content Include="Views\Trips\ReferaFriendDenied.cshtml" />
+    <Content Include="Views\RequestRides\Create.cshtml" />
+    <Content Include="Views\RequestRides\Delete.cshtml" />
+    <Content Include="Views\RequestRides\Details.cshtml" />
+    <Content Include="Views\RequestRides\Edit.cshtml" />
+    <Content Include="Views\RequestRides\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -332,6 +411,57 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\TripDBContext\201711221634182_Initial1.resx">
       <DependentUpon>201711221634182_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250601118_DataAnnotations.resx">
+      <DependentUpon>201711250601118_DataAnnotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250628513_DataAnnotations1.resx">
+      <DependentUpon>201711250628513_DataAnnotations1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250705037_Initial2.resx">
+      <DependentUpon>201711250705037_Initial2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250722517_Initial3.resx">
+      <DependentUpon>201711250722517_Initial3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250735010_Initial4.resx">
+      <DependentUpon>201711250735010_Initial4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250738023_Initial5.resx">
+      <DependentUpon>201711250738023_Initial5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250742143_Initial6.resx">
+      <DependentUpon>201711250742143_Initial6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250857258_Initial7.resx">
+      <DependentUpon>201711250857258_Initial7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250923481_Initial8.resx">
+      <DependentUpon>201711250923481_Initial8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250939149_Initial9.resx">
+      <DependentUpon>201711250939149_Initial9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711250946195_Initial10.resx">
+      <DependentUpon>201711250946195_Initial10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711252044275_Initial11.resx">
+      <DependentUpon>201711252044275_Initial11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711252308096_Initial12.resx">
+      <DependentUpon>201711252308096_Initial12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711261804567_Initial13.resx">
+      <DependentUpon>201711261804567_Initial13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711261809047_Initial14.resx">
+      <DependentUpon>201711261809047_Initial14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711262242033_Initial15.resx">
+      <DependentUpon>201711262242033_Initial15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\TripDBContext\201711270521111_Initial16.resx">
+      <DependentUpon>201711270521111_Initial16.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

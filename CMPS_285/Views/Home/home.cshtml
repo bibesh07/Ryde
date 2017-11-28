@@ -5,41 +5,74 @@
 }
 <link rel="stylesheet" href="~/css/modal.css" />
 
-@if(Request.IsAuthenticated == false)
+@if (Request.IsAuthenticated == false)
 {
-            <h1> You must Log In to continue.</h1>
+    <h1> You must Log In to continue.</h1>
 }
 
 //Show other Users
 else
 {
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script type="text/javascript">
+        function myclickfunction() {
+
+            var first = $('#first').val();
+            var second = $('#second').val();
+            document.getElementById("showskills").src =
+                "https://www.google.com/maps/embed/v1/directions?origin=" + first + "&destination=" + second + "&key=AIzaSyDnHQikn_6-24aEOQHYxdEJnlbJHO34AY0";
+        }
+
+        function initialize() {
+            //map
+            var input = document.getElementById('first');
+            var options = { componentRestrictions: { country: 'us' } };
+            new google.maps.places.Autocomplete(input, options);
+
+            var input = document.getElementById('second');
+            var options = { componentRestrictions: { country: 'us' } };
+            new google.maps.places.Autocomplete(input, options);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
 
     @model IEnumerable<CMPS_285.Models.ApplicationUser>
 
     <div class="col-md-3">
-    <table class="table table-hover">
-        <tr>
-            <th>
-                Other Users 
-            </th>
-        </tr>
-        
-        @foreach (var item in Model)
-        {
-            if (item.Fullname != User.Identity.GetFullName())
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Other Users
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
             {
-             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fullname)
-                </td>
-                <td><button class="btn btn-success" title="Add as Favourite"> <span class="glyphicon glyphicon-star"></span></button></td>
-             </tr>
-             }
-         }
-    </table>    
+                if (item.Fullname != User.Identity.GetFullName())
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fullname)
+                        </td>
+                        <td><button class="btn btn-success" title="Add as Favourite"> <span class="glyphicon glyphicon-star"></span></button></td>
+                    </tr>
+                }
+            }
+        </table>
+
         <!--popupbox-->
         <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Host a Ride</button>
+        <div style="display:grid;">
+            <button type="button" class="btn btn-default btn-default" data-toggle="modal" data-target="#myModal">Host a Ride</button><br />
+
+            @Html.ActionLink("Request Ride", "Create", "RequestRides", new { id = "" }, new { @class = "btn btn-danger" })
+
+
+            <br />
+
+            @Html.ActionLink("Group Chat", "Message", new { id = User.Identity.GetFullName() }, new { @class = "btn btn-warning" })
+        </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" style="display:none" role="dialog">
             <div class="modal-dialog">
@@ -48,33 +81,33 @@ else
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Ride Information</h4>
-                     </div>
-                        @using (Html.BeginForm("Create", "Trips", FormMethod.Post))
-                        {
-                              @Html.AntiForgeryToken()
-                                <div class="modal-body">
-                                <div class="row form-group">
-                                    <div class="col-col-md-6">
-                                        <input type="text" name="origin" id="origin" class="form-control" placeholder="Origin">
-                                    </div>
-                                    <br />
-                                    <div class="col-col-md-6">
-                                        <input type="text" name="destination" id="destination" class="form-control" placeholder="Destination">
-                                    </div>
-                                    <br />
-                                    <div class="col-col-md-6">
-                                        <input type="number" name="seats" id="seats" class="form-control" placeholder="No of seats available">
-                                    </div>
-                                    <br />
-                                    <div class="col-col-md-6">
-                                        <label for="Time" class="label-inline">Date and Time</label>
-                                        <input type="datetime-local" name="time" id="time" class="form-control" placeholder="Date and Time of Ride">
-                                    </div>
-                                    <br />
-                                    <input type="submit" class="btn btn-warning" value="Host" />
+                    </div>
+                    @using (Html.BeginForm("Create", "Trips", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="modal-body">
+                            <div class="row form-group">
+                                <div class="col-col-md-6">
+                                    <input type="text" name="origin" id="origin" class="form-control" placeholder="Origin">
                                 </div>
+                                <br />
+                                <div class="col-col-md-6">
+                                    <input type="text" name="destination" id="destination" class="form-control" placeholder="Destination">
+                                </div>
+                                <br />
+                                <div class="col-col-md-6">
+                                    <input type="number" name="seats" id="seats" class="form-control" placeholder="No of seats available">
+                                </div>
+                                <br />
+                                <div class="col-col-md-6">
+                                    <label for="Time" class="label-inline">Date and Time</label>
+                                    <input type="datetime-local" name="time" id="time" class="form-control" placeholder="Date and Time of Ride">
+                                </div>
+                                <br />
+                                <input type="submit" class="btn btn-warning" value="Host" />
                             </div>
-                        }
+                        </div>
+                    }
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -83,5 +116,35 @@ else
         </div>
     </div>
 
+            <div class="col-md-9" style="text-align:center;">
+                <!--<img style="overflow:hidden;width:inherit;" src="~/img/Blurry_Car_Ride.jpg" />-->
+                <div id="map" style="width:100%;">
+                    <iframe width="100%" id="showskills" height="450" frameborder="0" style="border:0" src="" allowfullscreen></iframe>
+                    <script>
+                        var origin = "Computer Science Building, SELU, Hammond";
+                        var Dest = "North Campus, Hammond";
+                        document.getElementById("showskills").src =
+                            "https://www.google.com/maps/embed/v1/directions?origin=" + origin + "&destination=" + Dest + "&key=AIzaSyDnHQikn_6-24aEOQHYxdEJnlbJHO34AY0";
+                    </script>
+                </div>
+                <div class="row" style="text-align:start;">
+                    <div class="col-md-5">
+                        <label>Origin</label>
+                        <input type="text" id="first" name="first" class="form-control">
+                    </div>
+                    <div class="col-md-5">
+                        <label>Destination</label>
+                        <input id="second" name="second" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" style="margin-top: 22%" onclick="myclickfunction();" class="btn btn-info">Locate </button>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:2%" class="col-lg-12">
+                <h1 style="text-align:center;"> Help or Get Helped!!</h1>
+                @Html.ActionLink("See Hosted Rides", "Index", new { Controller = "Trips" } , new { @class = "btn btn-primary btn-lg btn-block" , @type="button", @style= "background: steelblue;border: mistyrose;" })
+                @Html.ActionLink("See Requested Rides", "Index", new { Controller = "RequestRides" }, new { @class = "btn btn-primary btn-lg btn-block", @type = "button", @style = " margin-top:2%;background: #2b2525;" })
+            </div>
     <!--Notificaitons-->
- }
+}

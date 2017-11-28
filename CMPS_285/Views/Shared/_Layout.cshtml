@@ -94,7 +94,7 @@
                                         </li>
                                         <li class="divider"></li>
                                         <li>@Html.ActionLink("Messages", "Message", "Home")</li>
-                                        <li>@Html.ActionLink("Request a Ride", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Requests to join", "requestedRides", "Trips")</li>
                                         <li class="divider"></li>
                                         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                                     </ul>
@@ -120,11 +120,11 @@
             <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" style="font-size:x-large; " class="w3-bar-item w3-button" onclick="closeNav()">&times;</a> <br />
                 <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;&nbsp;Home</a>
-                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="glyphicon glyphicon-inbox"></span> &nbsp;&nbsp;&nbsp;&nbsp;Messages</a>
+                <a href="@Url.Action("Message", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="glyphicon glyphicon-inbox"></span> &nbsp;&nbsp;&nbsp;&nbsp;Messages</a>
                 <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="glyphicon glyphicon-star"></span> &nbsp;&nbsp;&nbsp;&nbsp;Favourites</a>
-                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="fa fa-cab"></span> &nbsp;&nbsp;&nbsp;&nbsp;Previous Rides</a>
-                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="fa fa-rocket"></span> &nbsp;&nbsp;&nbsp;&nbsp;Leader Board</a>
-                <a href="@Url.Action("Home", "Home")" class="w3-bar-item w3-button" title="Refer Your Friend and Ride with your friend for free" style="color: aliceblue;text-decoration:none;"><span class="fa fa-user-plus"></span> &nbsp;&nbsp;&nbsp;&nbsp;Refer a Friend </a>
+                <a href="@Url.Action("Index", "RequestRides")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="fa fa-cab"></span> &nbsp;&nbsp;&nbsp;&nbsp;Requested Rides</a>
+                <a href="@Url.Action("Index", "Trips")" class="w3-bar-item w3-button" style="text-decoration:none;color: aliceblue;"><span class="fa fa-rocket"></span> &nbsp;&nbsp;&nbsp;&nbsp;Hosted Rides</a>
+                <a href="@Url.Action("referaFriend", "Trips")" class="w3-bar-item w3-button" title="Refer Your Friend and Ride with your friend for free" style="color: aliceblue;text-decoration:none;"><span class="fa fa-user-plus"></span> &nbsp;&nbsp;&nbsp;&nbsp;Refer a Friend </a>
             </div>
             <button type="button" class="btn btn-primary btn-lg" style="overflow:hidden;border-radius: 0;background: url('/img/1.jpg');background-repeat: no-repeat;border-color: navy;" id="abc" onclick="openNav()">&#9776;</button>
         </div>
@@ -162,7 +162,7 @@
     <div class="container body-content">
         @RenderBody()
      </div>
-        <footer style="margin-top:15%;">
+        <footer>
             <hr />
             <p style="color:black;font-style: italic; text-align:center;"> <strong> Connect </strong> with us on Social Media </p>
             <div class="SocialMedia" style="text-align:center";>
@@ -170,6 +170,7 @@
                 <a href="#" class="fa fa-twitter" style="font-size:200%;color:#f45d22"></a>
                 <p style="color:black;font-size: 17px;"> RYDE, CopyRight &copy Team 2 CMPS_285; 2017 </p>
                 <a href="#"> @Html.ActionLink("Contact Us", "Contact", "Home") </a>
+                <a href="#"> @Html.ActionLink("About Us", "About", "Home") </a>
             </div>
         </footer>
     </div>

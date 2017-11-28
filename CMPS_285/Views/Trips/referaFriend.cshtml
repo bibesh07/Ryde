@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity;
+@using CMPS_285.Models;
+
+<h4 style="background:#dff0d8">
+    @TempData["Message"]
+</h4>
+
+    @using (Html.BeginForm("referralConfirmation", "Trips", FormMethod.Post))
+    {
+        <h1 style="text-align:center;"> Refer a Friend and start sharing rides</h1>
+        <h4> Thank you, <strong> @User.Identity.GetUserName()</strong></h4>
+        <p> for sharing and contributing to our website. We may be small but from contibution like yours we can all cometogether as a family. Enter you friends email or click any of the social media buttons on the bottom of the page to share among your friends.    </p>
+        <div style="display: -webkit-box;">
+            <input class="form-control" name="email" id="email" type="email" placeholder="Your Friend's Email" />
+            <button type="submit" class="btn btn-toolbar">Submit </button>
+        </div>
+    }

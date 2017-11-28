@@ -34,11 +34,6 @@ namespace CMPS_285.Controllers
 
         public ActionResult About()
         {
-            if (Request.IsAuthenticated == false)
-            {
-                return View("home");
-            }
-            else
                 return View();
         }
 
@@ -52,6 +47,12 @@ namespace CMPS_285.Controllers
             ViewBag.Message = "Feel Free to Contact Us. We are available on Facebook, Twitter and you can also contact us by email.";
 
             return View();
+        }
+
+        public void sendToPresident(String name, String email, String subject, String Message)
+        {
+            Trip trip = new Trip();
+            trip.FeedBack(name, email, subject, Message);
         }
     }
 }

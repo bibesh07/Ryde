@@ -64,7 +64,7 @@ namespace CMPS_285.Controllers
                 return View();
             }
             else
-                return RedirectToAction("Index", "home");
+                return RedirectToAction("", "home");
         }
 
         //

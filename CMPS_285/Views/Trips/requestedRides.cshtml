@@ -1,0 +1,101 @@
+﻿@model IEnumerable<CMPS_285.Models.Trip>
+@using Microsoft.AspNet.Identity;
+@using CMPS_285.Models;
+
+
+
+@{
+    ViewBag.Title = "requestedRide";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Request.IsAuthenticated == false)
+{
+    <h2> You must login to continue </h2>
+}
+else
+{
+    <h2 class="text-center"><strong> Requests </strong> for you </h2>
+    foreach (var item in Model.Reverse())
+    {
+        if (User.Identity.GetFullName() == item.driver)
+        {
+            if ( item.p1Status == "P" )
+            {
+            <div class="well" style= "background-color:wheat;">
+                @item.passanger1 has requested the ride that you hosted from @item.origin to @item.destination at @item.time 
+                <div class="pull-right" style="margin-top: -.65%;display: -webkit-inline-box;">
+                    <form method="post" action="@Url.Action("Decider", "Trips", new { driverId = item.ID , decision = true, name = item.passanger1})">
+                        <button type="submit" title="Accept" class="btn btn-success" id="accept" value="true;"><span class="glyphicon glyphicon-ok"></span></button>
+                    </form>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <form method="post" action="@Url.Action("Decider", "Trips", new { driverId = item.ID , decision = false, name = item.passanger1})">
+                        <button type="submit" title="Decline" class="btn btn-danger" id="decline" value="false;"><span class="glyphicon glyphicon-remove"></span></button>
+                    </form>
+                </div>
+            </div>
+            }
+            if (item.p2Status == "P" )
+            {
+                <div class="well" style="background-color:wheat;">
+                    @item.passanger2 has requested the ride that you hosted from @item.origin to @item.destination at @item.time
+                    <div class="pull-right" style="margin-top: -.65%;display: -webkit-inline-box;">
+                        <form method="post" action="@Url.Action("Decider", "Trips", new { driverId = item.ID , decision = true, name = item.passanger2})">
+                            <button type="submit" title="Accept" class="btn btn-success" value="true;"><span class="glyphicon glyphicon-ok"></span></button>
+                         </form>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <form method="post" action="@Url.Action("Decider", "Trips", new { driverId = item.ID , decision = false, name = item.passanger2})">
+                            <button type="submit" title="Decline" class="btn btn-danger" value="false;"><span class="glyphicon glyphicon-remove"></span></button>
+                        </form>
+</div>
+                </div>
+            }
+            if (item.p3Status == "P")
+            {
+                <div class="well" style="background-color:wheat;">
+                    @item.passanger3 has requested the ride that you hosted from @item.origin to @item.destination at @item.time
+                    <div class="pull-right" style="margin-top: -.65%;display: -webkit-inline-box;">
+                        <form method="post" action="@Url.Action("Decider", "Trips", new { driverId = item.ID , decision = true, name = item.passanger3})">
+                            <button type="submit" title="Accept" class="btn btn-success" value="true;"><span class="glyphicon glyphicon-ok"></span></button>
+                            </form>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <form method="post" action="@Url.Action("Decider", "Trips", new { driverId = item.ID , decision = false, name = item.passanger3})">
+                            <button type="submit" title="Decline" class="btn btn-danger" value="false;"><span class="glyphicon glyphicon-remove"></span></button>
+                        </form>
+</div>
+                </div>
+            }
+            if (item.p4Status == "P")
+            {
+                <div class="well" style="background-color:wheat;">
+                    @item.passanger4 has requested the ride that you hosted from @item.origin to @item.destination at @item.time
+                    <div class="pull-right" style="margin-top: -.65%;display: -webkit-inline-box;">
+                        <form method="post" action="@Url.Action("Decider", "Trips", new { driverId = item.ID , decision = true, name = item.passanger4})">
+                            <button type="submit" title="Accept" class="btn btn-success" value="true;"><span class="glyphicon glyphicon-ok"></span></button>
+                        </form>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <form method="post" action="@Url.Action("Decider", "Trips", new { driverId = item.ID , decision = false, name = item.passanger4})">
+                            <button type="submit" title="Decline" class="btn btn-danger" value="false;"><span class="glyphicon glyphicon-remove"></span></button>
+                        </form>
+</div>
+                </div>
+            }
+            if (item.p5Status == "P")
+            {
+                <div class="well" style="background-color:wheat;">
+                    @item.passanger5 has requested the ride that you hosted from @item.origin to @item.destination at @item.time
+                    <div class="pull-right" style="margin-top: -.65%;display: -webkit-inline-box;">
+                        <form method="post" action="@Url.Action("Decider", "Trips", new { driverId = item.ID , decision = true, name = item.passanger5})">
+                            <button type="submit" title="Accept" class="btn btn-success" value="true;"><span class="glyphicon glyphicon-ok"></span></button>
+                        </form>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <form method="post" action="@Url.Action("Decider", "Trips", new { driverId = item.ID , decision = false, name = item.passanger5})">
+                            <button type="submit" title="Decline" class="btn btn-danger" value="false;"><span class="glyphicon glyphicon-remove"></span></button>
+                       </form>
+</div>
+                </div>
+            }
+        }
+    }
+}
+
+

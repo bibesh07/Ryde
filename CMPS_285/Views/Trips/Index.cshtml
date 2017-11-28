@@ -7,34 +7,140 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 style="text-align:center;">All Notifications</h2>
+@if (Request.IsAuthenticated == false) {
+    <h1> Please login to Continue </h1>
+}
 
-    @foreach (var item in Model.Reverse())
+
+else{
+<h4 style="background:#dff0d8">
+    @TempData["Message"]
+</h4>
+<h2 style="text-align:center;">Hosted Rides</h2>
+
+    foreach (var item in Model.Reverse())
     {
-        <form method="post" action="@Url.Action("Reserve", "Trips", new { userId = User.Identity.GetUserId() , driverId = item.ID, origin = item.origin, destination = item.destination, datetime = item.time})">
-        <div class="well" style="background-color: lavender">
-            <p>
-                @Html.DisplayFor(modelItem => item.driver) has hosted a ride from
-                @Html.DisplayFor(modelItem => item.origin) to
-                @Html.DisplayFor(modelItem => item.destination) at
-                @Html.DisplayFor(modelItem => item.time)
-                @Html.DisplayFor(modelItem => item.passanger1)
+        <form method="post" action="@Url.Action("Reserve", "Trips", new { userId = User.Identity.GetUserId(), driverId = item.ID, origin = item.origin, destination = item.destination, datetime = item.time })">
+            <div class="well" style="background-color: lavender">
+                <p>
+                    @Html.DisplayFor(modelItem => item.driver) has hosted a ride from
+                    @Html.DisplayFor(modelItem => item.origin) to
+                    @Html.DisplayFor(modelItem => item.destination) at
+                    @Html.DisplayFor(modelItem => item.time)
 
-            <p>
-                Available Seats:
-                @for (int i = 1; i <= item.seats; i++)
-                {
-                    <button type="submit" method="post" class="btn btn-success" title="Reserve Seat"> <span class="glyphicon glyphicon-user"></span></button>
-                }
-                @for (int j = 0; j <= item.pending; j++)
-                {
-                    <button type="submit" method="post" class="btn btn-warning" disabled rel="tooltip" data-title="pending"> <span class="glyphicon glyphicon-user"></span></button>
-                }
-                @for (int j = 0; j <= item.confirmed; j++)
-                {
-                    <button type="submit" method="post" class="btn btn-danger" disabled rel="tooltip" data-title="pending"> <span class="glyphicon glyphicon-user"></span></button>
-                }
+                <p>
+                    Available Seats:
+                    @for (int i = 1; i <= item.seats; i++)
+                    {
+
+                        <button type="submit" formmethod="post" class="btn btn-success" title="Reserve Seat"> <span class="glyphicon glyphicon-user"></span></button>
+                        <!--Modal
+                        <div class="modal fade" id="popup">
+                            <div class="modal-dialog" style="position:initial;">
+                                <div class="modal-content">
+                                    <!--Header-
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h3 class="modal-title">You are about to request a ride are you sure you want to request?<small> (Rides once requested cannot be undone) </small></h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <button type="submit" method="post" class="btn btn-success" title="Reserve Seat">Join</button>
+                                        <button style="float:right;" type="button" class="btn btn-danger" data-dismiss="modal"> Close </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                    }
+                    @for (int j = 1; j <= item.pending; j++)
+                    {
+                        <button type="button" method="post" class="btn btn-warning" disabled rel="tooltip" data-title="pending"> <span class="glyphicon glyphicon-user"></span></button>
+                    }
+                    @for (int j = 1; j <= item.confirmed; j++)
+                    {
+                        <button type="button" method="post" class="btn btn-danger" disabled rel="tooltip" data-title="pending"> <span class="glyphicon glyphicon-user"></span></button>
+                    }
+                    <button title="Participants" data-toggle="modal" data-target="#myModals" style="background: #5bc0de;border: #5bc0de;" class="btn btn-info pull-right"> Click Me!! </button>
+                    @{
+                        var passanger1 = item.passanger1;
+                        var passanger2 = item.passanger2;
+                        var passanger3 = item.passanger3;
+                        var passanger4 = item.passanger4;
+                        var passanger5 = item.passanger5;
+                        var p1Status = item.p1Status;
+                        var p2Status = item.p2Status;
+                        var p3Status = item.p3Status;
+                        var p4Status = item.p4Status;
+                        var p5Status = item.p5Status;
+                    }
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModals" role="dialog">
+                        <div class="modal-dialog" style="position:initial">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Participants</h4>
+                                </div>
+                             <div class="modal-body">
+                                 <!--Passanger One-->
+                                @if (@passanger1 != null && @p1Status == "P")
+                                {
+                                    <p> @passanger1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: <button disabled class="btn btn-warning">Pending </button></p>
+                                }
+                                else if (@passanger1 != null && @p1Status == "C")
+                                {
+                                    <p> @passanger1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: <button disabled class="btn btn-success">Confirmed </button></p>
+                                }
+                                <!--Passanger Two-->
+                                @if (@passanger2 != null && @p2Status == "P")
+                                {
+                                    <p> @passanger2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: <button disabled class="btn btn-warning">Pending </button></p>
+                                }
+                                else if (@passanger2 != null && @p2Status == "C")
+                                {
+                                    <p> @passanger2  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: <button disabled class="btn btn-success">Confirmed </button></p>
+                                }
+                                <!--Passanger Three-->
+                                @if (@passanger3 != null && @p3Status == "P")
+                                {
+                                    <p> @passanger3  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: <button disabled class="btn btn-warning">Pending </button></p>
+                                }
+                                else if (@passanger3 != null && @p3Status == "C")
+                                {
+                                    <p> @passanger3  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: <button disabled class="btn btn-success">Confirmed </button></p>
+                                }
+                                <!--Passanger Four-->
+                                @if (@passanger4 != null && @p4Status == "P")
+                                {
+                                    <p> @passanger4  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: <button disabled class="btn btn-warning">Pending </button></p>
+                                }
+                                else if (@passanger4 != null && @p4Status == "C")
+                                {
+                                    <p> @item.passanger4  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: <button disabled class="btn btn-success">Confirmed </button></p>
+                                }
+                                <!--Passanger Five-->
+                                @if (@passanger5 != null && @p5Status == "P")
+                                {
+                                    <p> @passanger5  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: <button disabled class="btn btn-warning">Pending </button></p>
+                                }
+                                else if (@passanger5 != null && @p5Status == "C")
+                                {
+                                    <p> @passanger5  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status: <button disabled class="btn btn-success">Confirmed </button></p>
+                                }
+                                else if(@passanger1 == null && @passanger2 == null && @passanger3 == null )
+                                {
+                                    <p> No particaipants for this ride</p>
+                                }
+                            </div>
+            </div>
+
+            </div>
+            </div>
             </p>
-        </div>
+            </div>
         </form>
     }
+}
